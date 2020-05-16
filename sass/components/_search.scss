@@ -1,0 +1,13 @@
+.search-container {
+   background-color: $color-background;
+   min-height: 100%;
+   padding-top: 4rem;
+   padding-bottom: 4rem;
+   padding-left: 4rem;
+
+   .movies__container {
+      display: flex;
+      flex-wrap: wrap;
+      scrollbar-width: none;
+   }
+}
