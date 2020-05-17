@@ -9,6 +9,13 @@ export async function fetchMovie(movieId) {
   return movie;
 }
 
+export async function fetchTv(tvId) {
+  const url = `${API_URL}tv/${tvId}?api_key=${API_KEY}`;
+  let res = await fetch(url);
+  let tv = await res.json();
+  return tv;
+}
+
 export async function fetchNetflixOriginals() {
   const url = `${API_URL}discover/tv?api_key=${API_KEY}&with_networks=213`;
   let res = await fetch(url);

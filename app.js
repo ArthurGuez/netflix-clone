@@ -1,10 +1,11 @@
-import { fetchMovie, fetchNetflixOriginals, fetchTrending, fetchTopRated, fetchMoviesByGenre, fetchSearch } from "./apiService.js";
+import { fetchMovie, fetchNetflixOriginals, fetchTrending, fetchTopRated, fetchMoviesByGenre, fetchSearch, fetchTv } from "./apiService.js";
 
 import { genres } from "./data.js";
 
 import Header from "./components/Header.mjs";
 import NetflixOriginals from './components/NetflixOriginals.mjs';
 import Movies from './components/Movies.mjs';
+import Modal from './components/Modal.mjs'
 import Search from './components/Search.mjs';
 
 // Fonctions asynchrones pour les différentes sections de la homepage //
@@ -13,17 +14,30 @@ import Search from './components/Search.mjs';
     let movie = await fetchMovie(6075);
     const header = document.getElementById("header");
     header.innerHTML = Header(movie);
-    header.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`;
+    header.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`;
 })();
 
 const allContainers = document.getElementsByClassName('movies__container');
+const covers = document.getElementsByClassName('movies__container--movie-image');
 
 (async () => {
   let tvNetflix = await fetchNetflixOriginals();
   const netflixContainer = allContainers[0];
   tvNetflix.forEach(netflixShow => {
   netflixContainer.innerHTML += NetflixOriginals(netflixShow);
+  for (let i = 0; i < covers.length; i++) {
+    covers[i].addEventListener('click', async function modal() {
+      let id = tvNetflix[i].id;
+      let netflixShow = await fetchTv(id);
+      const modalContainer = document.getElementById('modal');
+      modalContainer.innerHTML = '';
+      modalContainer.innerHTML += Modal(netflixShow);
+      const closeModal = modalContainer.getElementById('close-modal');
+      console.log(netflixShow);
+    })
+  };
   });
+  
 })();
 
 (async () => {
