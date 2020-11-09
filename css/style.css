@@ -179,15 +179,27 @@ html {
 
 .search-container {
   background-color: #111111;
-  min-height: 100%;
+  height: 100%;
+  width: 99%;
   padding-top: 4rem;
   padding-bottom: 4rem;
   padding-left: 4rem;
-}
-.search-container .movies__container {
   display: flex;
   flex-wrap: wrap;
   scrollbar-width: none;
+}
+.search-container .search-movie {
+  min-height: 0;
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+  padding-right: 1rem;
+  height: 52rem;
+  cursor: pointer;
+  transition: all 450ms;
+  transform: center left;
+}
+.search-container .search-movie:hover {
+  transform: scale(1.1);
 }
 
 .movies {
@@ -311,6 +323,7 @@ html {
 
 .modal-container {
   position: fixed;
+  z-index: 500;
   background-repeat: no-repeat;
   background-size: cover;
   height: 52rem;
@@ -373,13 +386,10 @@ html {
   top: 5%;
   left: 95%;
   cursor: pointer;
-  color: #fff;
+  color: #f80616de;
   background-color: transparent;
-  border: 0.5px solid #7a7a7a;
+  border: 0.5px solid #f80616de;
   padding: 1rem 2rem 1rem 2rem;
-}
-.modal-container .modal-close:hover {
-  background-color: #f80616de;
 }
 
 /*# sourceMappingURL=style.css.map */

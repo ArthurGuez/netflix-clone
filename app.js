@@ -143,7 +143,6 @@ const allContainers = document.getElementsByClassName('movies__container');
   const covers = documentaryContainer.getElementsByClassName('movies__container--movie-image');
   documentaryMovies.forEach(documentaryMovie => {
     if (documentaryMovie.backdrop_path !== null) {
-      console.log(documentaryMovies);
       documentaryContainer.innerHTML += Movies(documentaryMovie);
       for (let i = 0; i < covers.length; i++) {
         covers[i].addEventListener('click', async function modal() {
@@ -165,18 +164,32 @@ const allContainers = document.getElementsByClassName('movies__container');
 // Fonction pour la partie recherche //
 
 const searchInput = document.getElementsByClassName('navigation__container--left__input')[0];
+const searchContainer = document.getElementsByClassName('search-container')[0];
 const mainContainer = document.getElementsByClassName('container')[0];
 
 const searchFunction = () => {
   searchInput.addEventListener('input', async (event) => {
     let searchResults = await fetchSearch(event.target.value);
-    const searchContainer = allContainers[6];
     searchContainer.innerHTML = '';
     if (event.target.value.length >= 1) {
       mainContainer.style.display = 'none';
+      const covers = searchContainer.getElementsByClassName('movies__container--movie-image');
       searchResults.forEach(result => {
         if (result.profile_path !== null) {
           searchContainer.innerHTML += Search(result);
+          for (let i = 0; i < covers.length; i++) {
+            covers[i].addEventListener('click', async function modal() {
+              let id = searchResults[i].id;
+              let searchResult = await fetchMovie(id);
+              const modalContainer = document.getElementById('modal');
+              modalContainer.innerHTML = '';
+              modalContainer.innerHTML += ModalMovie(searchResult );
+              const closeModal = document.getElementById('close-modal');
+              closeModal.addEventListener('click', async () => {
+                modalContainer.innerHTML = '';
+              })
+            })
+          };
         }
       })
     } else {

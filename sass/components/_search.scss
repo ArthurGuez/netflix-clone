@@ -1,13 +1,26 @@
 .search-container {
    background-color: $color-background;
-   min-height: 100%;
+   height: 100%;
+   width: 99%;
    padding-top: 4rem;
    padding-bottom: 4rem;
    padding-left: 4rem;
+   display: flex;
+   flex-wrap: wrap;
+   scrollbar-width: none;
 
-   .movies__container {
-      display: flex;
-      flex-wrap: wrap;
-      scrollbar-width: none;
+   .search-movie {
+      min-height: 0;
+      padding-top: 3rem;
+      padding-bottom: 4rem;
+      padding-right: 1rem;
+      height: 52rem;
+      cursor: pointer;
+      transition: all 450ms;
+      transform: center left;
+
+      &:hover {
+         transform: scale(1.1);
+      }
    }
 }
